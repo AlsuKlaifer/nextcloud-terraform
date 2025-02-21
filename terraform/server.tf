@@ -74,3 +74,17 @@ resource "yandex_compute_instance" "instance" {
     ssh-keys = "ubuntu:${file(var.public_ssh_key)}"
   }
 }
+
+resource "yandex_dns_zone" "zone" {
+  zone   = var.dns_zone
+  name   = var.dns_zone_name
+  public = true
+}
+
+resource "yandex_dns_recordset" "recordset" {
+  zone_id = yandex_dns_zone.zone.id
+  name    = var.dns_name
+  type    = "A"
+  ttl     = 300
+  data    = [yandex_compute_instance.instance.network_interface[0].nat_ip_address]
+}
