@@ -20,20 +20,3 @@ locals {
   service_key_path = var.yc_service_key_path
   zone             = var.yc_zone
 }
-
-variable "yc_cloud_id" {
-  type = string
-}
-
-variable "yc_folder_id" {
-  type = string
-}
-
-variable "yc_service_key_path" {
-  type = string
-}
-
-variable "yc_zone" {
-  type    = string
-  default = "ru-central1-d"
-}
